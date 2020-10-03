@@ -1,0 +1,12 @@
+{
+  "name": "Fitker",
+  "displayName": "Fitker",
+  "expo": {
+    "name": "Fitker",
+    "slug": "Fitker",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
