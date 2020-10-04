@@ -1,12 +1,21 @@
-import { StatusBar } from 'expo-status-bar'
 import React, { Component } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, StatusBar } from 'react-native'
 import AddEntry from './components/AddEntry'
+import { purple } from './utils/colors'
+import Constants from 'expo-constants'
 
+function FitStatusBar( { backgroundColor, ...props } ){
+  return (
+    <View style={{backgroundColor, height: Constants.statusBarHeight }}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props}/> 
+    </View>
+  )
+}
 export default class App extends Component {
   render () {
     return (
       <View>
+      <FitStatusBar backgroundColor={purple}  barStyle='light-content' />
         <AddEntry />
       </View>
     )
