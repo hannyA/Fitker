@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import {View, Text, TouchableOpacity } from 'react-native'
-import { getMetricMetaInfo, timeToString } from '../utils/helpers'
+import { getMetricMetaInfo, timeToString, getDailyReminderValue } from '../utils/helpers'
 import FitSlider from './FitSlider'
 import FitStepper from './FitStepper'
 import DateHeader from './DateHeader'
 // import { Ionicons } from '@expo/vector-icons'
 import Icon from 'react-native-vector-icons/Ionicons'
-
 import TextButton from './TextButton'
+import {submitEntry, removeEntry } from '../utils/api'
+import { connect } from "react-redux"
+import { addEntry } from "../actions"
+
 
 function Submitbtn( {onPress}) {
     return (
@@ -20,16 +23,16 @@ function Submitbtn( {onPress}) {
     )
 }
 
-export default class AddEntry extends Component {
+class AddEntry extends Component {
 
     state = {
         run  : 0,
-        bike : 10,
-        swim : 4,
-        eat  : 5,
-        sleep:8
+        bike : 0,
+        swim : 0,
+        eat  : 0,
+        sleep: 0
     }
-    
+
     increment = (metric) => {
         const {max, step} = getMetricMetaInfo(metric)
         console.log("increment")
@@ -70,6 +73,10 @@ export default class AddEntry extends Component {
         const entry = this.state
 
         // Update Redux
+        this.props.dispatch(addEntry({
+            [key]: entry
+        }))
+
         this.setState({
             run: 0,
             bike: 0,
@@ -81,6 +88,7 @@ export default class AddEntry extends Component {
         //Navigate Home
 
         //Save to DB
+        submitEntry({key, entry})
 
         // Clear local Notification
 
@@ -91,17 +99,22 @@ export default class AddEntry extends Component {
         const key = timeToString()
 
         // Update redux
+        this.props.dispatch(addEntry({
+            [key]: getDailyReminderValue()
+        }))
 
         // Route to home
 
         // Update DB
+        removeEntry(key)
+
     }
 
 
     render() {
         const metaInfo = getMetricMetaInfo()
 
-        if (true) {
+        if (this.props.alreadyLoggedIn) {
             return (
                 <View>
                     <Icon
@@ -146,3 +159,12 @@ export default class AddEntry extends Component {
         )
     }
 }
+function mapStateToProps(state) {
+    const key = timeToString()
+    
+    return {
+        alreadyLoggedIn: state[key] && typeof state[key].today === 'undefined'
+    }
+}
+
+export default connect(mapStateToProps)(AddEntry)

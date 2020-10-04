@@ -3,6 +3,9 @@ import { StyleSheet, Text, View, StatusBar } from 'react-native'
 import AddEntry from './components/AddEntry'
 import { purple } from './utils/colors'
 import Constants from 'expo-constants'
+import { createStore } from "redux"
+import { Provider } from "react-redux"
+import reducer from "./reducers"
 
 function FitStatusBar( { backgroundColor, ...props } ){
   return (
@@ -14,19 +17,13 @@ function FitStatusBar( { backgroundColor, ...props } ){
 export default class App extends Component {
   render () {
     return (
-      <View>
-      <FitStatusBar backgroundColor={purple}  barStyle='light-content' />
-        <AddEntry />
-      </View>
+      <Provider store={createStore(reducer)}>
+        <View>
+          <FitStatusBar backgroundColor={purple}  barStyle='light-content' />
+          <AddEntry />
+        </View>
+      </Provider>
+      
     )
   }
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// })
