@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import {View, Text } from 'react-native'
 import { getMetricMetaInfo } from '../utils/helpers'
+import FitSlider from './FitSlider'
+import FitStepper from './FitStepper'
+import DateHeader from './DateHeader'
+
 
 export default class AddEntry extends Component {
 
@@ -25,7 +29,7 @@ export default class AddEntry extends Component {
         })
     }
 
-    deccrement = (metric) => {
+    decrement = (metric) => {
         const { step } = getMetricMetaInfo(metric)
 
         this.setState((prevState) => {
@@ -49,13 +53,27 @@ export default class AddEntry extends Component {
 
         return (
             <View>
+            <DateHeader date={new Date().toLocaleDateString() } />
                 {Object.keys(metaInfo).map((key) => {
-                const {getIcon} = metaInfo[key]
+                const {getIcon, type, ...rest} = metaInfo[key]
                 const value = this.state[key]
                 
                     return (
-                        <View>
-                            <Text>{getIcon()}</Text>
+                        <View key={key}>
+                            {getIcon()}
+                            {type === 'slider'
+                              ? <FitSlider 
+                                    value={value}
+                                    onChange={(value) => this.slide(key, value)}
+                                    {...rest}
+                                />
+                              : <FitStepper
+                                    value={value}
+                                    onIncrement={() => this.increment(key)}
+                                    onDecrement={() => this.decrement(key)}
+                                {...rest} 
+                                />
+                            }
                         </View>
                     )
                 })}
