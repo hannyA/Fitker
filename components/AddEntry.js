@@ -29,7 +29,7 @@ export default class AddEntry extends Component {
         eat  : 5,
         sleep:8
     }
-
+    
     increment = (metric) => {
         const {max, step} = getMetricMetaInfo(metric)
         console.log("increment")
