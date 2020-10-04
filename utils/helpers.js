@@ -1,6 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
-import { Awesome, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
+import { FontAwesome, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { white } from './colors'
 
 export function isBetween (num, x, y) {
@@ -59,13 +59,13 @@ export function getMetricMetaInfo(metric) {
                 <View>
                     <MaterialIcons
                         name='directions-run'
-                        color='black'
+                        color={'black'}
                         size={35}
 
                     />
                 </View>
             )
-          } 
+          }
       },
       bike: {
         displayName: 'Bike',
@@ -78,9 +78,8 @@ export function getMetricMetaInfo(metric) {
               <View>
                   <MaterialCommunityIcons
                       name='bike'
-                      color='black'
+                      color={'black'}
                       size={35}
-
                   />
               </View>
           )
@@ -97,9 +96,8 @@ export function getMetricMetaInfo(metric) {
               <View>
                   <MaterialIcons
                       name='swim'
-                      color='black'
+                      color={'black'}
                       size={35}
-
                   />
               </View>
           )
@@ -116,9 +114,8 @@ export function getMetricMetaInfo(metric) {
               <View>
                   <FontAwesome
                       name='bed'
-                      color='black'
+                      color={'black'}
                       size={35}
-
                   />
               </View>
           )
@@ -135,7 +132,7 @@ export function getMetricMetaInfo(metric) {
               <View>
                   <MaterialCommunityIcons
                       name='food'
-                      color='black'
+                      color={'black'}
                       size={35}
 
                   />
@@ -145,7 +142,7 @@ export function getMetricMetaInfo(metric) {
       }
   }
 
-  return typeof metric === undefined
-  ? info
-  : info[metric]
+  return (typeof metric === 'undefined')
+    ? info
+    : info[metric]
 }

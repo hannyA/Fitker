@@ -45,9 +45,20 @@ export default class AddEntry extends Component {
     }
 
     render() {
+        const metaInfo = getMetricMetaInfo()
+
         return (
             <View>
-                {getMetricMetaInfo('bike').getIcon() }
+                {Object.keys(metaInfo).map((key) => {
+                const {getIcon} = metaInfo[key]
+                const value = this.state[key]
+                
+                    return (
+                        <View>
+                            <Text>{getIcon()}</Text>
+                        </View>
+                    )
+                })}
             </View>
         )
     }
