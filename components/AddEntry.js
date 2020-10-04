@@ -4,8 +4,10 @@ import { getMetricMetaInfo, timeToString } from '../utils/helpers'
 import FitSlider from './FitSlider'
 import FitStepper from './FitStepper'
 import DateHeader from './DateHeader'
-// import { TouchableOpacity } from 'react-native-gesture-handler'
+// import { Ionicons } from '@expo/vector-icons'
+import Icon from 'react-native-vector-icons/Ionicons'
 
+import TextButton from './TextButton'
 
 function Submitbtn( {onPress}) {
     return (
@@ -85,9 +87,34 @@ export default class AddEntry extends Component {
     }
 
 
+    reset = () => {
+        const key = timeToString()
+
+        // Update redux
+
+        // Route to home
+
+        // Update DB
+    }
+
+
     render() {
         const metaInfo = getMetricMetaInfo()
 
+        if (true) {
+            return (
+                <View>
+                    <Icon
+                        name='md-happy'
+                        size={100}
+                    />
+                    <Text>You already logged your info </Text>
+                    <TextButton onPress={this.reset}>
+                        RESET
+                    </TextButton>
+                </View>
+            )
+        }
         return (
             <View>
                 <DateHeader date={new Date().toLocaleDateString() } />
