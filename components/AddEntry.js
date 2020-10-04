@@ -21,15 +21,16 @@ function Submitbtn( {onPress}) {
 export default class AddEntry extends Component {
 
     state = {
-        run: 0,
-        bike: 10,
-        swim: 4,
-        eat: 5,
+        run  : 0,
+        bike : 10,
+        swim : 4,
+        eat  : 5,
         sleep:8
     }
 
     increment = (metric) => {
         const {max, step} = getMetricMetaInfo(metric)
+        console.log("increment")
 
         this.setState((prevState) => {
             const count = prevState[metric] + step
@@ -44,6 +45,7 @@ export default class AddEntry extends Component {
     decrement = (metric) => {
         const { step } = getMetricMetaInfo(metric)
 
+        console.log("decrement")
         this.setState((prevState) => {
             const count = prevState[metric] - step
 
@@ -89,7 +91,6 @@ export default class AddEntry extends Component {
         return (
             <View>
                 <DateHeader date={new Date().toLocaleDateString() } />
-                <Text>{JSON.stringify(this.state)}</Text>
                 {Object.keys(metaInfo).map((key) => {
                 const {getIcon, type, ...rest} = metaInfo[key]
                 const value = this.state[key]

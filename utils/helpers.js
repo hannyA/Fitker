@@ -94,7 +94,7 @@ export function getMetricMetaInfo(metric) {
         getIcon() {
           return (
               <View>
-                  <MaterialIcons
+                  <MaterialCommunityIcons
                       name='swim'
                       color={'black'}
                       size={35}
